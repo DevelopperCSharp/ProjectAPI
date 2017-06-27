@@ -63,13 +63,36 @@ namespace APIIdentityOAUTH.Controllers
             IdentityResult addResult = await AppUserManager.CreateAsync(user);
             if (!addResult.Succeeded) return GetErrorResult(addResult);
 
+
+            // Send mail after  creation an account
+            //la création d'un code unique (token) qui est valide pour les 6 prochaines heures 
+            //et lié à cet ID utilisateur, cela se produit uniquement lorsque vous appelez la méthode "GenerateEmailConfirmationTokenAsync",
+            string token = await AppUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            Uri callUrl = new Uri(Url.Link("ConfirmEmailRoute", new {id=user.Id, token=token}));
+            await AppUserManager.SendEmailAsync(user.Id, "Activate your Account", "Please confirm your account by clicking href=\"" + callUrl + "\">here</a>");
+
+
+
             Uri locationHeader=new Uri(Url.Link("GetUserById", new {id=user.Id}));
             return Created(locationHeader, TheModelFactory.Create(user));
            
         }
-       
 
+        //Ajouter l'URL Confirmer Email:http://localhost/api/account/ConfirmEmail?userid=xxxx&code=xxxx
+        [HttpGet]
+        [Route("ConfirmEmail", Name = "ConfirmEmailRoute")]
+        public async  Task<IHttpActionResult> ConfirmEmail(string userId = "", string token = "")
+        {
+            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token))
+            {
+                ModelState.AddModelError("", "User Id and Code are required");
+                return BadRequest(ModelState);
+            }
 
+            IdentityResult result = await AppUserManager.ConfirmEmailAsync(userId, token);
+
+            return !result.Succeeded ? GetErrorResult(result) : Ok();
+        }
 
     }
 }
