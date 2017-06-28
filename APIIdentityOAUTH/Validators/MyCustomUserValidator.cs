@@ -12,7 +12,7 @@ namespace APIIdentityOAUTH.Validators
         public class MyCustomUserValidator : UserValidator<ApplicationUser>
         {
 
-            List<string> _allowedEmailDomains = new List<string> { "outlook.com", "hotmail.com", "gmail.com", "yahoo.com" };
+            List<string> _allowedEmailDomains = new List<string> { "orange.fr", "outlook.com", "hotmail.com", "gmail.com", "yahoo.com" };
 
             public MyCustomUserValidator(ApplicationUserManager appUserManager)
                 : base(appUserManager)

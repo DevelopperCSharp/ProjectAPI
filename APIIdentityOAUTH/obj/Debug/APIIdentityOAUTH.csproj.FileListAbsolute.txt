@@ -109,3 +109,11 @@ C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentit
 C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.Owin.Cors.xml
 C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\System.Web.Http.Owin.xml
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.Threading.Tasks.dll
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\SendGrid.SmtpApi.dll
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\SendGridMail.dll
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.Threading.Tasks.xml
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.Threading.Tasks.Extensions.xml
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.Threading.Tasks.Extensions.Desktop.xml

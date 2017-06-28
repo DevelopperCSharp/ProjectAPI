@@ -68,7 +68,8 @@ namespace APIIdentityOAUTH.Controllers
             //la création d'un code unique (token) qui est valide pour les 6 prochaines heures 
             //et lié à cet ID utilisateur, cela se produit uniquement lorsque vous appelez la méthode "GenerateEmailConfirmationTokenAsync",
             string token = await AppUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-            Uri callUrl = new Uri(Url.Link("ConfirmEmailRoute", new {id=user.Id, token=token}));
+            //code = System.Web.HttpUtility.UrlEncode (code); code = System.Web.HttpUtility.UrlDecode (code)
+            Uri callUrl = new Uri(Url.Link("ConfirmEmailRoute", new {id=user.Id, token = System.Web.HttpUtility.UrlEncode(token)}));
             await AppUserManager.SendEmailAsync(user.Id, "Activate your Account", "Please confirm your account by clicking href=\"" + callUrl + "\">here</a>");
 
 
@@ -83,16 +84,47 @@ namespace APIIdentityOAUTH.Controllers
         [Route("ConfirmEmail", Name = "ConfirmEmailRoute")]
         public async  Task<IHttpActionResult> ConfirmEmail(string userId = "", string token = "")
         {
-            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token))
+            string code = System.Web.HttpUtility.UrlDecode(token);
+            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(code))
             {
                 ModelState.AddModelError("", "User Id and Code are required");
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await AppUserManager.ConfirmEmailAsync(userId, token);
+            IdentityResult result = await AppUserManager.ConfirmEmailAsync(userId, code);
 
             return !result.Succeeded ? GetErrorResult(result) : Ok();
         }
+
+
+
+
+        // Changer le mot de pass
+        [Route("ChangePassword")]
+        public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            // ID User Authentifié
+            IdentityResult result = await AppUserManager.ChangePasswordAsync(User.Identity.GetUserId(),
+                model.OldPassword,
+                model.NewPassword);
+            return result.Succeeded ? Ok() : GetErrorResult(result);
+        }
+
+        // Delete User
+
+        [Route("user/{id:guid}")]
+        public async Task<IHttpActionResult> DeleteUser(string id)
+        {
+            var user = await AppUserManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                IdentityResult result = await AppUserManager.DeleteAsync(user);
+                return result.Succeeded ? GetErrorResult(result):Ok();
+            }
+            return NotFound();
+        }
+
 
     }
 }
