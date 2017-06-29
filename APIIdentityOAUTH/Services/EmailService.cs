@@ -32,8 +32,8 @@ namespace APIIdentityOAUTH.Services
             myMessage.Text = message.Body;
             myMessage.Html = message.Body;
 
-            var credentials = new NetworkCredential(ConfigurationManager.AppSettings["emailService:barbiegithub"],
-                ConfigurationManager.AppSettings["emailService:haboubi123"]);
+            var credentials = new NetworkCredential(ConfigurationManager.AppSettings["emailService:Account"],
+                ConfigurationManager.AppSettings["emailService:Password"]);
 
             // Create a Web transport for sending email.
             var transportWeb = new Web(credentials);

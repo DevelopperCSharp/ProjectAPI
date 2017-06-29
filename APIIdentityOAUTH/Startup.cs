@@ -4,7 +4,9 @@ using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 using System.Web.Http;
 using APIIdentityOAUTH.Infrastructure;
+using APIIdentityOAUTH.Providers;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Owin;
 
@@ -34,14 +36,30 @@ namespace APIIdentityOAUTH
         *et la configurons dans le contexte Owin à l'aide de la méthode d'extension "CreatePerOwinContext". 
         *Les deux objets (ApplicationDbContext et AplicationUserManager) seront disponibles pendant toute la durée de la demande.
         */
+
+        //The path for generating JWT will be as :”http://localhost:59822/oauth/token”.
         private void ConfigureOAuthTokenGeneration(IAppBuilder app)
         {
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
-            // Plugin the OAuth bearer JSON Web Token tokens generation and Consumption will be here
+            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+            {
+                //For Dev enviroment only (on production should be AllowInsecureHttp = false)
+                AllowInsecureHttp = true,
+                TokenEndpointPath = new PathString("/oauth/token"),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+               
+                //We’ve specified the implementation on how to validate the Resource owner user credential
+                //in a custom class named “CustomOAuthProvider”
+                Provider = new CustomOAuthProvider(),
+                //implementation on how to generate the access token using JWT formats
+                AccessTokenFormat = new CustomJwtFormat("http://localhost:54152")
+            };
 
+            // OAuth 2.0 Bearer Access Token Generation
+            app.UseOAuthAuthorizationServer(OAuthServerOptions);
         }
 
 

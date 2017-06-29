@@ -117,3 +117,11 @@ C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentit
 C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.Threading.Tasks.xml
 C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.Threading.Tasks.Extensions.xml
 C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Thinktecture.IdentityModel.Core.dll
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Thinktecture.IdentityModel.Core.pdb

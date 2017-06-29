@@ -232,3 +232,12 @@ et si le token (code) est valide, le champ "EmailConfirmed" sera défini sur "tru
 et cela prouve que le courrier électronique appartient à l'utilisateur enregistré.
 
 Etape2: Install package SendGrid (pourenvvoyer des emails)
+
+
+
+/************************************************************************/
+
+// Authentification et Authorization (JWT=Json Web Tokens)
+//Implémenter l'authentification JSON Web Tokens dans ASP.NET Web API et Identity 2.1
+//Dans ce tutoriel et pour le garder simple; Les deux rôles OAuth 2.0
+//(serveur d'autorisation et serveur de recours) vivront dans la même AP

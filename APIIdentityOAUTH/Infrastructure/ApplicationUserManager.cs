@@ -39,7 +39,7 @@ namespace APIIdentityOAUTH.Infrastructure
             appUserManager.UserValidator = new MyCustomUserValidator(appUserManager)
             {
                 AllowOnlyAlphanumericUserNames = true,
-                RequireUniqueEmail = true
+                //RequireUniqueEmail = true
 
             };
 
