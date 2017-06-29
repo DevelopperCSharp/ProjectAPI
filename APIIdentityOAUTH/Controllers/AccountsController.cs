@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using APIIdentityOAUTH.Infrastructure;
 using System.Threading.Tasks;
@@ -14,7 +11,7 @@ namespace APIIdentityOAUTH.Controllers
     [RoutePrefix("api/accounts")]
     public class AccountsController : BaseApiController
     {
-
+        [Authorize]
         [Route("users")]
         public IHttpActionResult GetUsers()=> Ok(AppUserManager.Users.ToList()
                                                  .Select(u => TheModelFactory.Create(u)));
@@ -22,7 +19,7 @@ namespace APIIdentityOAUTH.Controllers
 
 
 
-
+        [Authorize]
         [Route("user/{id:guid}", Name = "GetUserById")]
         public async Task<IHttpActionResult> GetUser(string id)
         {
@@ -33,7 +30,7 @@ namespace APIIdentityOAUTH.Controllers
 
 
 
-
+        [Authorize]
         [Route("user/{username}")]
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
@@ -43,7 +40,7 @@ namespace APIIdentityOAUTH.Controllers
         }
 
 
-
+        [AllowAnonymous]
         [Route("Register")]
         public async Task<IHttpActionResult> RegisterUser(CreateUserBindingModel createUserModel)
         {
@@ -72,8 +69,6 @@ namespace APIIdentityOAUTH.Controllers
             Uri callUrl = new Uri(Url.Link("ConfirmEmailRoute", new {id=user.Id, token = System.Web.HttpUtility.UrlEncode(token)}));
             await AppUserManager.SendEmailAsync(user.Id, "Activate your Account", "Please confirm your account by clicking href=\"" + callUrl + "\">here</a>");
 
-
-
             Uri locationHeader=new Uri(Url.Link("GetUserById", new {id=user.Id}));
             return Created(locationHeader, TheModelFactory.Create(user));
            
@@ -81,6 +76,7 @@ namespace APIIdentityOAUTH.Controllers
 
         //Ajouter l'URL Confirmer Email:http://localhost/api/account/ConfirmEmail?userid=xxxx&code=xxxx
         [HttpGet]
+        [AllowAnonymous]
         [Route("ConfirmEmail", Name = "ConfirmEmailRoute")]
         public async  Task<IHttpActionResult> ConfirmEmail(string userId = "", string token = "")
         {
@@ -98,7 +94,7 @@ namespace APIIdentityOAUTH.Controllers
 
 
 
-
+        [Authorize]
         // Changer le mot de pass
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
@@ -112,7 +108,7 @@ namespace APIIdentityOAUTH.Controllers
         }
 
         // Delete User
-
+        [Authorize]
         [Route("user/{id:guid}")]
         public async Task<IHttpActionResult> DeleteUser(string id)
         {

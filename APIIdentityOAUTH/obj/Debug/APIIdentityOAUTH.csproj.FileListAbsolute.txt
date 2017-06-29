@@ -97,7 +97,6 @@ c:\users\fadel\documents\visual studio 2017\Projects\APIIdentityOAUTH\APIIdentit
 c:\users\fadel\documents\visual studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\fr\System.Web.WebPages.resources.dll
 c:\users\fadel\documents\visual studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\fr\System.Web.WebPages.Deployment.resources.dll
 c:\users\fadel\documents\visual studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\fr\System.Web.WebPages.Razor.resources.dll
-c:\users\fadel\documents\visual studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\obj\Debug\APIIdentityOAUTH.csprojResolveAssemblyReference.cache
 c:\users\fadel\documents\visual studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\obj\Debug\APIIdentityOAUTH.dll
 c:\users\fadel\documents\visual studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\obj\Debug\APIIdentityOAUTH.pdb
 C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\obj\Debug\APIIdentityOAUTH.Migrations.CreationDB.resources
@@ -125,3 +124,7 @@ C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentit
 C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.IdentityModel.Tokens.xml
 C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\System.IdentityModel.Tokens.Jwt.xml
 C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Thinktecture.IdentityModel.Core.pdb
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.Owin.Security.Jwt.dll
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\Microsoft.Owin.Security.Jwt.xml
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\bin\System.IdentityModel.Tokens.Jwt.pdb
+C:\Users\fadel\Documents\Visual Studio 2017\Projects\APIIdentityOAUTH\APIIdentityOAUTH\obj\Debug\APIIdentityOAUTH.csprojResolveAssemblyReference.cache

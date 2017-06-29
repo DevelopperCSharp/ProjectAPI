@@ -31,8 +31,17 @@ namespace APIIdentityOAUTH.Migrations
                 JoinDate = DateTime.Now.AddYears(-3)
             };
 
-            manager.Create(user, "MySuperP@ssword!");
-       
-    }
+            //manager.Create(user, "MySuperP@ssword!");
+            //if (roleManager.Roles.Count() == 0)
+            //{
+            //    roleManager.Create(new IdentityRole { Name = "SuperAdmin" });
+            //    roleManager.Create(new IdentityRole { Name = "Admin" });
+            //    roleManager.Create(new IdentityRole { Name = "User" });
+            //}
+
+            //var adminUser = manager.FindByName("SuperPowerUser");
+
+            //manager.AddToRoles(adminUser.Id, new string[] { "SuperAdmin", "Admin" });
+        }
     }
 }
