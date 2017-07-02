@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Configuration;
 using System.IdentityModel.Tokens;
-using Microsoft.Ajax.Utilities;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Encoder;
 using Thinktecture.IdentityModel.Tokens;
+//using System.IdentityModel.Tokens;
 
-namespace APIIdentityOAUTH.Providers
+namespace APIIdentityOAUTH.Formats
 {
     //n'y a pas de support direct pour l'émission de JWT dans ASP.NET Web API, afin de commencer à publier JWT, 
     //nous devons l'implémenter manuellement en mettant en œuvre l'interface "ISecureDataFormat" et implémentons la méthode "Protéger"
@@ -59,14 +58,19 @@ namespace APIIdentityOAUTH.Providers
             string symmetricKeyAsBase64 = ConfigurationManager.AppSettings["as:AudienceSecret"];
 
             var keyByteArray = TextEncodings.Base64Url.Decode(symmetricKeyAsBase64);
-
+            var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(keyByteArray);
             var signingKey = new HmacSigningCredentials(keyByteArray);
 
             var issued = data.Properties.IssuedUtc;
 
             var expires = data.Properties.ExpiresUtc;
-
-            var token = new JwtSecurityToken(_issuer, audienceId, data.Identity.Claims, issued.Value.UtcDateTime, expires.Value.UtcDateTime, signingKey);
+            var token = new JwtSecurityToken(_issuer,
+                                               audienceId,
+                                               data.Identity.Claims,
+                                               issued.Value.UtcDateTime,
+                                               expires.Value.UtcDateTime,
+                                                 signingKey);
+            // var token = new JwtSecurityToken(_issuer, audienceId, data.Identity.Claims, issued.Value.UtcDateTime, expires.Value.UtcDateTime, signingKey);
 
             var handler = new JwtSecurityTokenHandler();
 

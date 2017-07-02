@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 using System.Web.Http;
+using APIIdentityOAUTH.Formats;
 using APIIdentityOAUTH.Infrastructure;
 using APIIdentityOAUTH.Providers;
 using Microsoft.Owin;
@@ -53,9 +54,14 @@ namespace APIIdentityOAUTH
         //The path for generating JWT will be as :”http://localhost:59822/oauth/token”.
         private void ConfigureOAuthTokenGeneration(IAppBuilder app)
         {
-            // Configure the db context and user manager to use a single instance per request
+            // Configure the db context and user manager and role  to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            //affecter la classe de gestion de rôle au contexte d'Owin
+            app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
+
+
+
 
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
@@ -76,6 +82,8 @@ namespace APIIdentityOAUTH
         }
 
 
+
+
         ////Install-Package Microsoft.Owin.Security.Jwt -Version 3.0.0
 
         //Cette étape configurera notre API sur les jetons de confiance émis uniquement par notre serveur d'autorisation,
@@ -93,6 +101,7 @@ namespace APIIdentityOAUTH
             string audienceId = ConfigurationManager.AppSettings["as:AudienceId"];
             byte[] audienceSecret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["as:AudienceSecret"]);
 
+           
             // Api controllers with an [Authorize] attribute will be validated with JWT
             app.UseJwtBearerAuthentication(
                 new JwtBearerAuthenticationOptions
@@ -102,8 +111,19 @@ namespace APIIdentityOAUTH
                     IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
                     {
                         new SymmetricKeyIssuerSecurityTokenProvider(issuer, audienceSecret)
-                    }
+                    },
+
+                    //Provider = new OAuthBearerAuthenticationProvider
+                    //{
+                    //    OnValidateIdentity = context =>
+                    //    {
+                    //        context.Ticket.Identity.AddClaim(new System.Security.Claims.Claim("newCustomClaim", "newValue"));
+                    //        return Task.FromResult<object>(null);
+                    //    }
+                    //}
                 });
+
+
         }
 
 

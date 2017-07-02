@@ -11,7 +11,6 @@ namespace APIIdentityOAUTH.Infrastructure
         {
         }
 
-
         public static  ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options,IOwinContext context)
         {
             var appDbContext = context.Get<ApplicationDbContext>();

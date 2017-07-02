@@ -11,15 +11,15 @@ namespace APIIdentityOAUTH.Controllers
     [RoutePrefix("api/accounts")]
     public class AccountsController : BaseApiController
     {
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [Route("users")]
         public IHttpActionResult GetUsers()=> Ok(AppUserManager.Users.ToList()
                                                  .Select(u => TheModelFactory.Create(u)));
-        
 
 
 
-        [Authorize]
+
+        [Authorize(Roles = "Admin")]
         [Route("user/{id:guid}", Name = "GetUserById")]
         public async Task<IHttpActionResult> GetUser(string id)
         {
@@ -30,7 +30,7 @@ namespace APIIdentityOAUTH.Controllers
 
 
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [Route("user/{username}")]
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
@@ -108,7 +108,7 @@ namespace APIIdentityOAUTH.Controllers
         }
 
         // Delete User
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [Route("user/{id:guid}")]
         public async Task<IHttpActionResult> DeleteUser(string id)
         {
@@ -120,6 +120,55 @@ namespace APIIdentityOAUTH.Controllers
             }
             return NotFound();
         }
+
+
+
+
+        //Cette Methode  permet aux utilisateurs du rôle Admin de gérer les rôles pour un utilisateur sélectionné,
+
+        [Authorize(Roles = "Admin")]
+        [Route("user/{id:guid}/roles")]
+        [HttpPut]
+        public  async Task<IHttpActionResult> AssignRolesToUser([FromUri] string id, [FromBody] string[] rolesToAssign)
+        {
+            var appUser = await AppUserManager.FindByIdAsync(id);
+
+            if (appUser == null) return NotFound();
+
+            var currentRoles = await  AppUserManager.GetRolesAsync(appUser.Id);
+            var roleNotExists = rolesToAssign.Except(AppRoleManager.Roles.Select(x => x.Name)).ToArray();
+
+
+            if (roleNotExists.Any())
+            {
+                ModelState.AddModelError("", $"those roles not exist in the systeme {roleNotExists}" );
+                return BadRequest(ModelState);
+            }
+
+            IdentityResult removeResult =  await AppUserManager.RemoveFromRoleAsync(appUser.Id, currentRoles.ToArray().ToString());
+            if (!removeResult.Succeeded)
+            {
+                ModelState.AddModelError("","Failed to remove roles dor user");
+                return BadRequest(ModelState);
+            }
+
+
+            IdentityResult addResult = await AppUserManager.AddToRolesAsync(appUser.Id, rolesToAssign);
+            if (!addResult.Succeeded)
+            {
+                ModelState.AddModelError("","Failed to Add roles for user");
+                return BadRequest(ModelState);
+            
+            }
+
+            return Ok();
+        }
+
+
+
+
+
+
 
 
     }

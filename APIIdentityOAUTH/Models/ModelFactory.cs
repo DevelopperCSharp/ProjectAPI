@@ -1,8 +1,10 @@
 ﻿using APIIdentityOAUTH.Infrastructure;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Http.Routing;
 
@@ -35,9 +37,32 @@ namespace APIIdentityOAUTH.Models
                 Claims = _AppUserManager.GetClaimsAsync(appUser.Id).Result
             };
         }
-    }
 
-    public class UserReturnModel
+        public RoleReturnModel Create(IdentityRole appRole)
+        {
+            return new RoleReturnModel
+            {
+                Url = _UrlHelper.Link("GetRoleById", new { id = appRole.Id }),
+                Id = appRole.Id,
+                Name = appRole.Name
+
+            };
+
+
+        }
+
+
+   
+    
+
+    
+}
+}
+
+
+
+
+public class UserReturnModel
     {
         public string Url { get; set; }
         public string Id { get; set; }
@@ -50,4 +75,12 @@ namespace APIIdentityOAUTH.Models
         public IList<string> Roles { get; set; }
         public IList<System.Security.Claims.Claim> Claims { get; set; }
     }
-}
+
+
+    public class RoleReturnModel
+    {
+        public string Url { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+    }
+

@@ -11,12 +11,17 @@ namespace APIIdentityOAUTH.Controllers
     {
 
         private ApplicationUserManager _AppUserManager;
+        private ApplicationRoleManager _AppRoleManager;
         private ModelFactory _modelFactory;
 
         // instance og ApplicationUserManager
         protected ApplicationUserManager AppUserManager => _AppUserManager ??
                                                          Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
+        // instance og ApplicationRoleManager
+
+        protected ApplicationRoleManager AppRoleManager => _AppRoleManager ??
+                                                           Request.GetOwinContext().GetUserManager<ApplicationRoleManager>();
 
         // Instance of ModelFactory
 
